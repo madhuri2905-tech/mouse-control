@@ -1,0 +1,67 @@
+Mouse Control Coding :-
+- from line number 1 to 9 we are importing different libraries for the program to work.
+- > cv2(computer vision) : - is designed for real time computer vision, image processing and machine learning.
+                         - here we are using cv2 library for video capturing and analysis.
+- > mediapipe : - is designed for tracking body parts and objects.
+                - here we're using mediapipe to detect hand landmarks for hand gesture recognition(for mouse control)
+- > pyautogui : - is designed for the user to programatically contol the mouse and keyboard.
+                - in this code this library allows the user to use mouse control.
+- > numpy : - is designed for scientific and numerical computing.
+            - it's the short form of numerical python. here in the code we are using it for specific function that can detect the control.
+- in line no. 12 we are defining 2 variables(screen_w and screen_h) these store the screen width and hight.
+- it is done by using the size() function from the library pyautogui.
+- size() = it returns the size of the abject(here the screen) in form of width and height.
+- in line no. 15 we are accessing the hand tracking using the function from mediapipe.
+- in line no. 17 we are defining another variable hands.
+- in the variable hands we are initializing that only 1 hand can be captured.
+- this is done by using - max_num_hands(here given as 1)
+- in line no. 19 we are defining another variable named as mp_draw.
+- the variable mp_draw has the drawing utils in it which are the main features to draw the landmarks on the hand.
+- then in line no. 22 we are defining another variable named cap.
+- the cap variable loads the camera.
+- variable cap captures the vedio from the default camera as we have given it as 0(default camera)
+- in line no. 26 we are defining 2 variables -> prev_x and prev_y
+- it initializes the previouse mouse coordinates as 0 at first.
+- in line no. 29 we have another variable named as smoothening.
+- the variable smoothening smoothens the cursor movement on the screen.
+- this is very import part of the code because the movement shouldn't be out of control.
+- we are defining smoothening is equal to 7 because, 7 is the average/medium number.
+- if we make the number more than 7 then the mouse movement is too smooth.
+- meanwhile if we make the number less than 7 then the mouse movement is rigid.
+- in line no. 32 we are starting a while True loop which is an infinite loop.
+- this is where the actual process of the code starts.
+- in line no. 35 we are having 2 variables:-
+- success : checks if the frame is captured successfully using boolean(True or False).
+- img : stores the captured frame in the variable img.
+- therefore both these variable check and capture the frame.
+- in line no. 38 we are writing a code which says the frames are flipped in horizontal way.
+- we are fliping the images because we don't want mirror images to be captured but we want real image.
+- in line no. 40 we are finding the height and width of the IMAGE.
+- in the lines no.s 43 and 45 we are converting bgr to rgb as mediapipe will work with rgb.
+- then we are processing the rgb format and storing it in the variable result.
+- in line no. 47 we are starting a condition.
+- then inside the condition we are starting a for loop.
+- the for loop : takes and stores all the 21 hand landmarks
+- we are the storing all these landmarks in the list - lm_list
+- from line no.s 54 to 58 we are giving an ID for each land mark.
+- then we are finding the x and y coordinates of the ID
+- at last we are appending the ID into the lm_list list.
+- then from the line no.s 64 to 69 we are setting the coordinates for the tip land marks of 3 fingers which include:-
+- thumb : 4
+- index : 8
+- middle : 12
+- then is line no.s 73 and 74 we are converting the x and y vedio coordinates to screen coordinates.
+- it is done by sing the function interp from the numpy library.
+- interp() - performs one-dimensional linear interpolation for a given set of discrete data points.
+- in line no.s 77 and 78 we are smoothening both x and y coordinates for easy movement.
+- in line no. 82 we are  moving the couser to certain x and y coordinates by using moveTo function.
+- in line no. 84 we are updating the previous(prev_y,prev_x) coordinates for the next frame(curr_x,curr_y).
+- in line no.s 87 to 89 we are defining a function distance which gets the distance between 2 points and returns it.
+- from line no.s 92 to 96 we are checks if the distance between thumb and index is close.
+- then we are confirmin git as left click and printing on the screen.
+- from line no.s 99 to 103 we are doing the vise versa.
+- we are checking the distance between thumb and middle.
+- if it's close then we are confirming it as right click and printing it on the screen.
+- in line no. 106 we are showing the video window with hand tracking.
+- then in line no. 108 we are checking if the user clicked ESC button if yes then all the screens are closed.
+- at the last we are destroying all the cv2 windows.
